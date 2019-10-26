@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 </head>
-<body style="background-color: lime; color: white;">
+<body style="background-color: green; color: white;">
 
 <nav>
-    <a href="/">Welcime</a>
-    <a href="/about">About</a>
-    <a href="/contacts">Contacts</a>
+    <a href="/">Welcome</a><br>
+    <a href="/about">About</a><br>
+    <a href="/contacts">Contacts</a><br>
+    <a href="/licanse">Licensia</a><br>
 </nav>
 
 @yield('content')

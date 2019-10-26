@@ -15,11 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// App Info
+Route::get('/about','AppInfo@About');
+Route::get('/contacts','AppInfo@Contacts');
 
-Route::get('/about', function () {
-    return view('about');
-});
+Route::get('/licanse','GPL');
 
-Route::get('/contacts', function () {
-    return view('contacts');
-});
+// Route::get('/about', function () {
+//     return view('about');
+// });
+
+// Route::get('/contacts', function () {
+//     return view('contacts');
+// });
