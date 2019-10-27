@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    <link rel=”stylesheet” href="/css/main.cs" >
 </head>
-<body style="background-color: green; color: white;">
+
+<body>
 
 <nav>
     <a href="/">Welcome</a><br>
