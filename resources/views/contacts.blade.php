@@ -4,7 +4,7 @@
 
 @section('content')
     <h1> Content </h1>
-    <p>hgtuhtuhkjhgothgituohyo45thy</p>
+    <p>texttexttexttexttexttexttexttexttexttexttexttext</p>
     <hr>
     <p>{{ $name }}</p>
     <p>{{ $where }}</p>
