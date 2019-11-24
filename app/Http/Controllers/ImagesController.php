@@ -47,7 +47,8 @@ class ImagesController extends Controller
      */
     public function show($id)
     {
-        //
+        $image = DB::table('images')->find( $id );
+        return view( 'images.show', [ 'img' => $image ]);
     }
 
     /**
