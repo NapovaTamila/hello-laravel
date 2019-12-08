@@ -7,17 +7,24 @@
 <table border="2px, solid, black">
     @foreach ($imgs as $i)
             <tr>
-                <td><button>@component('btn-edit')
-                            @endcomponent
-                    </button>
+                <td>@component('btn-edit')
+                    @endcomponent
+                    
                 </td>
                 <td>
                     <a href="/image-manager/{{$i->id}}">{{$i->url}}</a> <br>
                     {{$i->filename}}
                 </td>
                 <td><img style="width:150px;" src="{{ $i->url }}"></td>
-                <td><button>@component('btn-delete')
-                            @endcomponent</button></td>
+                    <td>
+                        <form action="/image-manager/{{ $i -> id }}" method="POST">
+                            @csrf
+                            @method('DELETE') <!-- підстановка метода на DELETE -->
+                            <button type="submit">[X]</button>
+                        </form>
+                        <!--@component('btn-delete')
+                        @endcomponent-->
+                    </td>
             </tr>
     @endforeach
 </table>
