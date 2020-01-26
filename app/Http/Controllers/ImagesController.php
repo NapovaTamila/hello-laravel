@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ImagesController extends Controller
 {
@@ -71,7 +72,8 @@ class ImagesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $image = DB::table('images')->find( $id );
+        return view('images.edit', [ 'img' => $image ]);
     }
 
     /**
@@ -83,7 +85,14 @@ class ImagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //  $request->hasFile() //чи є такий файл
+        DB::table('images')
+            ->where('id','=',$id)
+            ->update([
+                'url' => $url,
+                'filename' => $path,
+                'alt' => $title . ' (' . $alt . ')'
+            ]);
     }
 
     /**
@@ -94,6 +103,8 @@ class ImagesController extends Controller
      */
     public function destroy($id)
     {
+        //DB::table('images')->find($id)
+        //Storage::delete( $img->filename );
         DB::table('images')
             ->where('id','=',$id)
             ->delete();

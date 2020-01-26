@@ -2,11 +2,12 @@
 
 <a href="/image-manager/create">[CREATE]</a>
 
-<table border="2px, solid, black">
+<table border="1">
     @foreach ($imgs as $i)
             <tr>
-                <td>@component('btn-edit')
-                    @endcomponent
+                <td>    <!--@component('btn-edit')
+                        @endcomponent-->
+                    <a href="/image-manager/{{$i->id}}/edit"><button type="submit">[EDIT]</button></a>
                 </td>
 
                 <td>
