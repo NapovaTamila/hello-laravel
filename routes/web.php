@@ -32,4 +32,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('image-manager', 'ImagesController');
+Route::resource('image-manager', 'ImagesController')->middleware('auth');

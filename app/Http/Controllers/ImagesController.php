@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ImagesController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -89,17 +92,19 @@ class ImagesController extends Controller
         $title = $request->input('im_title');   //витягуємо що заповнив користувач
         $alt = $request->input('im_alt');       //витягуємо що заповнив користувач
         $file = $request->file('im_file');      //витягуємо що заповнив користувач
-        $path = $file->store('public');         //куда зберег файл
-        $url = str_replace( 'public/', '/storage/', $path );
+//        $path = $file->store('public');         //куда зберег файл
+//        $url = str_replace( 'public/', '/storage/', $path );
 
         //  $request->hasFile() //чи є такий файл
         DB::table('images')
             ->where('id','=',$id)
             ->update([
-                'url' => $url,
-                'filename' => $path,
+//                'url' => $url,
+//                'filename' => $path,
                 'alt' => $title . ' (' . $alt . ')'
             ]);
+
+            return redirect( '/image-manager/' );
     }
 
     /**
