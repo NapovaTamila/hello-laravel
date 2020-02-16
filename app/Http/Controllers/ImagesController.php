@@ -85,6 +85,13 @@ class ImagesController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $title = $request->input('im_title');   //витягуємо що заповнив користувач
+        $alt = $request->input('im_alt');       //витягуємо що заповнив користувач
+        $file = $request->file('im_file');      //витягуємо що заповнив користувач
+        $path = $file->store('public');         //куда зберег файл
+        $url = str_replace( 'public/', '/storage/', $path );
+
         //  $request->hasFile() //чи є такий файл
         DB::table('images')
             ->where('id','=',$id)

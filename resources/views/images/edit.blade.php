@@ -3,7 +3,8 @@
 <a href="/image-manager"><button>HOME</button></a>
 <br>
 
-    <form action="/image-manager" method="POST" enctype="multipart/form-data">
+    <form action="/image-manager/{{$img->id}}" method="POST" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         
 
