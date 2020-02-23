@@ -26,6 +26,6 @@
         <td>{{ $img->alt }}</td>
     </tr>
     <tr>
-        <td colspan="2"><img src="{{ $img->url }}"></td>
+        <td colspan="2"><img style='height:300px;' src="{{ $img->url }}"></td>
     </tr>
 </table>

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ImagesController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth');
-    }
+//    public function __construct() {   //рреєстрація (авторизація)
+//        $this->middleware('auth');
+//    }
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +50,7 @@ class ImagesController extends Controller
             'filename' => $path,
             'alt' => $title . ' (' . $alt . ')'
         ]);
-        // var_dump( $path );                   //розказує про змінну
+        // var_dump( $path );                   //розказує про змінну $path
         // return view('images.create');
         return redirect('/image-manager');
     }
@@ -88,23 +88,29 @@ class ImagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $image = DB::table('images')->find( $id );
+        $path = $image->filename;               //старе заповнення
+        $url = $image->url;                     //старе заповнення
         $title = $request->input('im_title');   //витягуємо що заповнив користувач
         $alt = $request->input('im_alt');       //витягуємо що заповнив користувач
-        $file = $request->file('im_file');      //витягуємо що заповнив користувач
-//        $path = $file->store('public');         //куда зберег файл
-//        $url = str_replace( 'public/', '/storage/', $path );
 
-        //  $request->hasFile() //чи є такий файл
+        if ($request->hasFile('im_file')) {          //перевірка чи є файл
+            $forDelPath= $path;                     //в змінну записуєься для подальшого видалення
+            $file = $request->file('im_file');      //витягуємо що заповнив користувач
+            $path = $file->store('public');         //куда зберег файл
+            $url = str_replace( 'public/', '/storage/', $path );
+        }
         DB::table('images')
             ->where('id','=',$id)
             ->update([
-//                'url' => $url,
-//                'filename' => $path,
+                'url' => $url,
+                'filename' => $path,
                 'alt' => $title . ' (' . $alt . ')'
             ]);
+            
+        Storage::delete( $forDelPath );// видалення $forDelPath 
 
-            return redirect( '/image-manager/' );
+        return redirect( '/image-manager/' );
     }
 
     /**
@@ -115,8 +121,8 @@ class ImagesController extends Controller
      */
     public function destroy($id)
     {
-        //DB::table('images')->find($id)
-        //Storage::delete( $img->filename );
+        //$image = DB::table('images')->find($id)
+        //Storage::delete( $image->filename );          //повністю видаляє картинку
         DB::table('images')
             ->where('id','=',$id)
             ->delete();
